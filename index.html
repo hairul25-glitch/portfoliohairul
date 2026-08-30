@@ -1956,42 +1956,8 @@
           });
         }
 
-        // 7. Stat Number Count-up Animation
-        function animateCounter(el) {
-          const rawText = el.getAttribute("data-target") || el.textContent || "";
-          const match = rawText.match(/(\d+)/);
-          if (!match) return;
-
-          const targetNum = parseInt(match[1], 10);
-          const prefix = rawText.startsWith("0") && rawText.length > 1 && !rawText.startsWith("00") ? "0" : "";
-          const suffix = rawText.replace(/^[0-9]+/, "");
-          const duration = 800; // ms
-          const startTime = performance.now();
-
-          function step(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out expo
-            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            const currentVal = Math.floor(easeProgress * targetNum);
-
-            const displayNum = prefix && currentVal < 10 ? `0${currentVal}` : `${currentVal}`;
-            el.textContent = `${displayNum}${suffix}`;
-
-            if (progress < 1) {
-              requestAnimationFrame(step);
-            } else {
-              el.textContent = rawText; // Exact final string
-            }
-          }
-
-          requestAnimationFrame(step);
-        }
-
-        // 8. Reveal on Scroll with IntersectionObserver
+        // 7. Reveal on Scroll with IntersectionObserver
         const revealElements = document.querySelectorAll(".reveal");
-        const statNumbers = document.querySelectorAll(".stat-number");
-        let statsAnimated = false;
 
         if (prefersReducedMotion) {
           revealElements.forEach(el => el.classList.add("is-revealed"));
@@ -2000,13 +1966,6 @@
             entries.forEach(entry => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("is-revealed");
-
-                // If about stats container enters, animate counters
-                if (!statsAnimated && (entry.target.id === "aboutStats" || entry.target.contains(document.getElementById("aboutStats")))) {
-                  statsAnimated = true;
-                  statNumbers.forEach(statEl => animateCounter(statEl));
-                }
-
                 obs.unobserve(entry.target);
               }
             });
@@ -2018,7 +1977,6 @@
           revealElements.forEach(el => observer.observe(el));
         } else {
           revealElements.forEach(el => el.classList.add("is-revealed"));
-          statNumbers.forEach(statEl => animateCounter(statEl));
         }
 
         // 9. Parallax Effect on Hero Image Wrapper
