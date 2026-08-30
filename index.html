@@ -1,0 +1,2099 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hairul Mardana Putra | Finance & Accounting Portfolio</title>
+    <meta name="description" content="Personal portfolio of Hairul Mardana Putra — Finance & Accounting professional specializing in Accounts Receivable, Accounts Payable, Purchasing, and Financial Administration." />
+    <meta property="og:title" content="Hairul Mardana Putra | Finance & Accounting Portfolio" />
+    <meta property="og:description" content="Personal portfolio of Hairul Mardana Putra — Finance & Accounting professional specializing in Accounts Receivable, Accounts Payable, Purchasing, and Financial Administration." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Fraunces, Inter, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ==========================================================================
+         1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+         ========================================================================== */
+      :root {
+        --bg: #161F1B;
+        --bg-alt: #1D2A24;
+        --panel: #212F28;
+        --ink: #F3EFE6;
+        --ink-dim: #B9C2BB;
+        --ink-faint: #7C877F;
+        --accent: #E3A23A;
+        --accent-soft: rgba(227, 162, 58, 0.14);
+        --sage: #7FA98D;
+        --line: rgba(243, 239, 230, 0.10);
+        --radius: 14px;
+
+        --font-display: 'Fraunces', Georgia, serif;
+        --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+
+        --max-width: 1040px;
+        --header-height: 72px;
+        --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* ==========================================================================
+         2. BASE RESET & GENERAL STYLING
+         ========================================================================== */
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Focus styles for keyboard accessibility */
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      /* ==========================================================================
+         3. FILM NOISE / GRAIN OVERLAY
+         ========================================================================== */
+      .grain-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 990;
+        opacity: 0.038;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* ==========================================================================
+         4. INTRO CURTAIN REVEAL OVERLAY
+         ========================================================================== */
+      .intro-curtain {
+        position: fixed;
+        inset: 0;
+        background-color: var(--bg);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 16px;
+        transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
+        pointer-events: all;
+      }
+
+      .intro-curtain.loaded {
+        transform: translateY(-100%);
+        pointer-events: none;
+      }
+
+      .intro-logo {
+        font-family: var(--font-mono);
+        font-size: 1.25rem;
+        letter-spacing: 0.2em;
+        color: var(--ink);
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+        transform: translateY(12px);
+        animation: introTextIn 0.8s var(--ease-luxury) forwards 0.2s;
+      }
+
+      .intro-logo span {
+        color: var(--accent);
+      }
+
+      .intro-bar {
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(to right, var(--accent), var(--sage));
+        border-radius: 2px;
+        opacity: 0;
+        animation: introBarIn 0.8s var(--ease-luxury) forwards 0.4s;
+      }
+
+      @keyframes introTextIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes introBarIn {
+        to {
+          opacity: 1;
+          width: 80px;
+        }
+      }
+
+      /* ==========================================================================
+         5. CUSTOM CURSOR
+         ========================================================================== */
+      .custom-cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease, transform 0.15s ease;
+        will-change: transform, left, top;
+        box-shadow: 0 0 10px rgba(227, 162, 58, 0.6);
+      }
+
+      .custom-cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(227, 162, 58, 0.45);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: width 0.3s var(--ease-luxury), height 0.3s var(--ease-luxury), background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+        will-change: transform, left, top, width, height;
+      }
+
+      .cursor-text {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #161F1B;
+        opacity: 0;
+        transform: scale(0.6);
+        transition: opacity 0.2s ease, transform 0.2s var(--ease-luxury);
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /* Cursor Hover States */
+      .custom-cursor-ring.is-hovering-btn {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(227, 162, 58, 0.92);
+        border-color: var(--accent);
+        box-shadow: 0 0 20px rgba(227, 162, 58, 0.35);
+      }
+
+      .custom-cursor-ring.is-hovering-btn .cursor-text {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .custom-cursor-ring.is-hovering-card {
+        width: 68px;
+        height: 68px;
+        background-color: rgba(227, 162, 58, 0.95);
+        border-color: var(--accent);
+        box-shadow: 0 0 24px rgba(227, 162, 58, 0.45);
+      }
+
+      .custom-cursor-ring.is-hovering-card .cursor-text {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .custom-cursor-ring.is-hovering-link {
+        width: 44px;
+        height: 44px;
+        background-color: var(--accent-soft);
+        border-color: var(--accent);
+      }
+
+      /* ==========================================================================
+         6. TOP SCROLL PROGRESS BAR
+         ========================================================================== */
+      .scroll-progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2.5px;
+        width: 0%;
+        background: linear-gradient(to right, var(--accent), var(--sage));
+        z-index: 10001;
+        transition: width 0.05s linear;
+      }
+
+      /* ==========================================================================
+         7. TYPOGRAPHY & HEADINGS
+         ========================================================================== */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.18;
+        color: var(--ink);
+      }
+
+      h1 {
+        font-size: clamp(34px, 5.5vw, 58px);
+      }
+
+      h2 {
+        font-size: clamp(28px, 4vw, 42px);
+      }
+
+      h3 {
+        font-size: clamp(20px, 2.5vw, 26px);
+      }
+
+      p {
+        color: var(--ink-dim);
+        font-size: 1rem;
+        max-width: 70ch;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.25s var(--ease-luxury), border-color 0.25s var(--ease-luxury), background 0.25s var(--ease-luxury);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .section-padding {
+        padding-top: 120px;
+        padding-bottom: 120px;
+      }
+
+      .section-header {
+        margin-bottom: 48px;
+      }
+
+      /* Mask Reveal for Section Headings (h2) */
+      .mask-reveal-wrapper {
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .mask-reveal-text {
+        display: block;
+        transform: translateY(105%);
+        transition: transform 0.85s var(--ease-luxury);
+        will-change: transform;
+      }
+
+      .is-revealed .mask-reveal-text {
+        transform: translateY(0);
+      }
+
+      .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--sage);
+        margin-bottom: 12px;
+        display: inline-block;
+      }
+
+      .italic-accent {
+        font-style: italic;
+        font-family: var(--font-display);
+        font-weight: 400;
+        color: var(--accent);
+      }
+
+      /* ==========================================================================
+         8. BUTTONS & MAGNETIC CONTROLS
+         ========================================================================== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 9999px;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        white-space: nowrap;
+        position: relative;
+        will-change: transform;
+        transition: transform 0.35s var(--ease-luxury), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn-primary {
+        background-color: var(--accent);
+        color: #161F1B;
+        box-shadow: 0 4px 14px rgba(227, 162, 58, 0.22);
+      }
+
+      .btn-primary:hover {
+        background-color: #ebb353;
+        box-shadow: 0 8px 24px rgba(227, 162, 58, 0.42);
+      }
+
+      .btn-ghost {
+        background-color: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        color: var(--ink);
+        background-color: var(--accent-soft);
+        box-shadow: 0 0 16px rgba(227, 162, 58, 0.15);
+      }
+
+      .btn-pill {
+        border: 1px solid var(--line);
+        background-color: var(--panel);
+        color: var(--ink-dim);
+        padding: 10px 20px;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-family: var(--font-mono);
+        transition: transform 0.35s var(--ease-luxury), border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .btn-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background-color: var(--accent-soft);
+        box-shadow: 0 0 16px rgba(227, 162, 58, 0.2);
+      }
+
+      /* ==========================================================================
+         9. NAVIGATION BAR
+         ========================================================================== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--header-height);
+        background: rgba(22, 31, 27, 0.82);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+        color: var(--ink);
+        display: inline-block;
+        transition: transform 0.35s var(--ease-luxury);
+      }
+
+      .nav-logo span {
+        color: var(--accent);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+      }
+
+      .nav-link {
+        font-size: 0.9rem;
+        color: var(--ink-dim);
+        font-weight: 500;
+        position: relative;
+        padding: 6px 0;
+        display: inline-block;
+        transition: color 0.25s var(--ease-luxury), transform 0.35s var(--ease-luxury);
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: var(--accent);
+        transition: width 0.3s var(--ease-luxury);
+      }
+
+      .nav-link:hover {
+        color: var(--ink);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--ink);
+        font-size: 1.25rem;
+        transition: border-color 0.25s ease, background-color 0.25s ease;
+      }
+
+      .nav-toggle span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: var(--ink);
+        transition: transform 0.25s var(--ease-luxury), opacity 0.25s ease;
+      }
+
+      .nav-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* ==========================================================================
+         10. HERO SECTION
+         ========================================================================== */
+      .hero-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-top: calc(var(--header-height) + 40px);
+        padding-bottom: 80px;
+        background: radial-gradient(circle at 85% 15%, var(--accent-soft) 0%, transparent 60%);
+        overflow: hidden;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        gap: 56px;
+        width: 100%;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero-title {
+        margin-bottom: 14px;
+        overflow: hidden;
+      }
+
+      /* Staggered text character/word animation in hero */
+      .stagger-word {
+        display: inline-block;
+        white-space: pre;
+        opacity: 0;
+        transform: translateY(28px);
+        animation: heroWordIn 0.8s var(--ease-luxury) forwards;
+      }
+
+      @keyframes heroWordIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-role {
+        font-family: var(--font-mono);
+        color: var(--sage);
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+        letter-spacing: 0.03em;
+      }
+
+      .hero-bio {
+        margin-bottom: 32px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .hero-image-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 380px;
+        margin-left: auto;
+        will-change: transform;
+        transition: transform 0.1s ease-out;
+      }
+
+      .hero-card {
+        background-color: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        aspect-ratio: 4 / 5;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+        position: relative;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hero-card:hover {
+        border-color: rgba(227, 162, 58, 0.35);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(227, 162, 58, 0.12);
+      }
+
+      .hero-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s var(--ease-luxury);
+      }
+
+      .hero-card:hover img {
+        transform: scale(1.04);
+      }
+
+      .img-fallback {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--panel), var(--bg-alt));
+        color: var(--ink-dim);
+        font-family: var(--font-mono);
+        text-align: center;
+        padding: 24px;
+        gap: 12px;
+      }
+
+      .img-fallback svg {
+        width: 48px;
+        height: 48px;
+        stroke: var(--sage);
+      }
+
+      /* ==========================================================================
+         11. ABOUT SECTION & STAT COUNTERS
+         ========================================================================== */
+      .about-section {
+        background-color: var(--bg);
+        border-top: 1px solid var(--line);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 64px;
+        align-items: flex-start;
+      }
+
+      .about-bio-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--ink-dim);
+        margin-bottom: 40px;
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding-top: 32px;
+        border-top: 1px solid var(--line);
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .stat-number {
+        font-family: var(--font-display);
+        font-size: clamp(32px, 3.5vw, 46px);
+        font-weight: 600;
+        color: var(--accent);
+        line-height: 1;
+        display: inline-block;
+      }
+
+      .stat-label {
+        font-family: var(--font-mono);
+        font-size: 0.775rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ink-faint);
+        line-height: 1.4;
+      }
+
+      /* ==========================================================================
+         12. EXPERIENCE / TIMELINE WITH PULSE TIP
+         ========================================================================== */
+      .experience-section {
+        background-color: var(--bg-alt);
+        border-top: 1px solid var(--line);
+      }
+
+      .timeline-container {
+        position: relative;
+        padding-left: 36px;
+        margin-top: 48px;
+      }
+
+      /* Vertical Track Line */
+      .timeline-track {
+        position: absolute;
+        left: 9px;
+        top: 8px;
+        bottom: 16px;
+        width: 2px;
+        background-color: var(--line);
+        border-radius: 2px;
+      }
+
+      /* Dynamic Scroll Progress Bar */
+      .timeline-progress {
+        position: absolute;
+        left: 9px;
+        top: 8px;
+        width: 2px;
+        height: 0%;
+        max-height: calc(100% - 24px);
+        background: linear-gradient(to bottom, var(--accent), var(--sage));
+        border-radius: 2px;
+        transition: height 0.08s ease-out;
+      }
+
+      /* Live Tracking Pulse Tip */
+      .timeline-pulse-tip {
+        position: absolute;
+        bottom: -4px;
+        left: -4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--accent);
+        box-shadow: 0 0 12px var(--accent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .timeline-pulse-tip.active {
+        opacity: 1;
+        animation: pulseTracking 1.8s infinite ease-in-out;
+      }
+
+      @keyframes pulseTracking {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 8px var(--accent);
+        }
+        50% {
+          transform: scale(1.6);
+          box-shadow: 0 0 18px var(--accent), 0 0 30px rgba(227, 162, 58, 0.4);
+        }
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 56px;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+      }
+
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Circular Dot on Timeline */
+      .timeline-dot {
+        position: absolute;
+        left: -36px;
+        top: 6px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: var(--bg-alt);
+        border: 2px solid var(--line);
+        transition: all 0.4s var(--ease-luxury);
+        z-index: 2;
+      }
+
+      .timeline-dot.active {
+        background-color: var(--accent);
+        border-color: var(--accent);
+        box-shadow: 0 0 18px var(--accent);
+        transform: scale(1.15);
+      }
+
+      .timeline-period {
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        color: var(--sage);
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+      }
+
+      .timeline-role {
+        font-size: 1.45rem;
+        margin-bottom: 4px;
+        color: var(--ink-dim);
+        transition: color 0.4s var(--ease-luxury);
+      }
+
+      .timeline-item.active .timeline-role {
+        color: var(--ink);
+      }
+
+      .timeline-company {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--ink-faint);
+        margin-bottom: 14px;
+        transition: color 0.4s var(--ease-luxury);
+      }
+
+      .timeline-item.active .timeline-company {
+        color: var(--ink-dim);
+      }
+
+      .timeline-desc {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--ink-dim);
+        margin-bottom: 16px;
+      }
+
+      .timeline-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .timeline-tag {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--ink-dim);
+        background-color: var(--panel);
+        border: 1px solid var(--line);
+        padding: 4px 12px;
+        border-radius: 9999px;
+        transition: border-color 0.25s ease, color 0.25s ease;
+      }
+
+      .timeline-item.active .timeline-tag {
+        border-color: rgba(227, 162, 58, 0.2);
+        color: var(--ink);
+      }
+
+      /* ==========================================================================
+         13. PROJECTS SECTION WITH 3D TILT & EDITORIAL INDEX
+         ========================================================================== */
+      .projects-section {
+        background-color: var(--bg);
+        border-top: 1px solid var(--line);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px;
+        perspective: 1200px;
+      }
+
+      .project-card {
+        background-color: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition: transform 0.5s var(--ease-luxury), border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(227, 162, 58, 0.18);
+      }
+
+      /* Decorative Editorial Index (01, 02) */
+      .project-index-num {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 3rem;
+        font-weight: 700;
+        color: rgba(243, 239, 230, 0.08);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+        z-index: 5;
+        transition: color 0.3s ease, transform 0.3s var(--ease-luxury);
+      }
+
+      .project-card:hover .project-index-num {
+        color: rgba(227, 162, 58, 0.22);
+        transform: translateY(-2px) scale(1.05);
+      }
+
+      .project-media {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        background-color: var(--bg-alt);
+        overflow: hidden;
+        position: relative;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .project-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s var(--ease-luxury);
+      }
+
+      .project-card:hover .project-media img {
+        transform: scale(1.06);
+      }
+
+      .project-body {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: relative;
+        z-index: 2;
+      }
+
+      .project-category {
+        font-family: var(--font-mono);
+        font-size: 0.775rem;
+        color: var(--sage);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 8px;
+      }
+
+      .project-title {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+        color: var(--ink);
+      }
+
+      .project-desc {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        color: var(--ink-dim);
+        margin-bottom: 24px;
+        flex-grow: 1;
+      }
+
+      .project-link {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: gap 0.25s var(--ease-luxury), color 0.25s ease;
+      }
+
+      .project-card:hover .project-link {
+        gap: 10px;
+        color: #ebb353;
+      }
+
+      /* ==========================================================================
+         14. SKILLS SECTION WITH INTERACTIVE SPOTLIGHT
+         ========================================================================== */
+      .skills-section {
+        background-color: var(--bg-alt);
+        border-top: 1px solid var(--line);
+      }
+
+      .skills-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 28px;
+        background-color: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Interactive Spotlight Overlay */
+      .skills-spotlight {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        background: radial-gradient(360px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(227, 162, 58, 0.12), transparent 75%);
+        z-index: 1;
+      }
+
+      .skills-cloud:hover .skills-spotlight {
+        opacity: 1;
+      }
+
+      .skill-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 11px 24px;
+        border-radius: 9999px;
+        border: 1px solid var(--line);
+        background-color: var(--bg-alt);
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        letter-spacing: 0.01em;
+        position: relative;
+        z-index: 2;
+        transition: transform 0.35s var(--ease-luxury), border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        cursor: default;
+      }
+
+      .skill-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background-color: var(--accent-soft);
+        box-shadow: 0 4px 16px rgba(227, 162, 58, 0.25);
+        transform: translateY(-3px) scale(1.03);
+      }
+
+      /* ==========================================================================
+         15. CONTACT SECTION
+         ========================================================================== */
+      .contact-section {
+        background: radial-gradient(circle at 50% 50%, var(--accent-soft) 0%, transparent 70%), var(--bg);
+        border-top: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .contact-box {
+        max-width: 680px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-title {
+        margin-bottom: 16px;
+      }
+
+      .contact-desc {
+        font-size: 1.05rem;
+        margin-bottom: 36px;
+      }
+
+      .contact-main-btn {
+        margin-bottom: 40px;
+        padding: 16px 38px;
+        font-size: 1.05rem;
+      }
+
+      .social-links-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      /* ==========================================================================
+         16. FOOTER
+         ========================================================================== */
+      .footer {
+        padding: 40px 24px;
+        border-top: 1px solid var(--line);
+        background-color: var(--bg);
+        text-align: center;
+      }
+
+      .footer-text {
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        color: var(--ink-faint);
+        letter-spacing: 0.04em;
+      }
+
+      /* ==========================================================================
+         17. REVEAL ANIMATIONS (CURTAIN / CLIP-PATH / TRANSLATE)
+         ========================================================================== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.85s var(--ease-luxury), transform 0.85s var(--ease-luxury);
+        will-change: opacity, transform;
+      }
+
+      .reveal.is-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Project Card Curtain Reveal */
+      .project-card.reveal {
+        opacity: 0;
+        clip-path: inset(18% 0 0 0 round var(--radius));
+        transform: translateY(32px);
+        transition: opacity 0.85s var(--ease-luxury), clip-path 0.85s var(--ease-luxury), transform 0.85s var(--ease-luxury);
+      }
+
+      .project-card.reveal.is-revealed {
+        opacity: 1;
+        clip-path: inset(0 0 0 0 round var(--radius));
+        transform: translateY(0);
+      }
+
+      /* ==========================================================================
+         18. RESPONSIVE BREAKPOINTS (Mobile < 860px)
+         ========================================================================== */
+      @media (max-width: 860px) {
+        :root {
+          --header-height: 64px;
+        }
+
+        .section-padding {
+          padding-top: 80px;
+          padding-bottom: 80px;
+        }
+
+        .nav-toggle {
+          display: flex;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: var(--header-height);
+          right: 0;
+          width: min(280px, 80vw);
+          height: calc(100vh - var(--header-height));
+          background: rgba(29, 42, 36, 0.98);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-left: 1px solid var(--line);
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 32px 24px;
+          gap: 20px;
+          transform: translateX(100%);
+          transition: transform 0.35s var(--ease-luxury);
+          box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-links.open {
+          transform: translateX(0);
+        }
+
+        .nav-link {
+          font-size: 1.05rem;
+          width: 100%;
+          padding: 8px 0;
+        }
+
+        .hero-section {
+          padding-top: calc(var(--header-height) + 32px);
+          padding-bottom: 60px;
+          min-height: auto;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          text-align: center;
+        }
+
+        .hero-content {
+          align-items: center;
+        }
+
+        .hero-actions {
+          justify-content: center;
+        }
+
+        .hero-image-wrapper {
+          order: -1;
+          max-width: 260px;
+          margin: 0 auto;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+
+        .about-stats {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .timeline-container {
+          padding-left: 28px;
+        }
+
+        .timeline-dot {
+          left: -28px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .about-stats {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        
+        .hero-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .hero-actions .btn {
+          width: 100%;
+        }
+      }
+
+      /* ==========================================================================
+         19. ACCESSIBILITY & PREFERS-REDUCED-MOTION
+         ========================================================================== */
+      /* Sembunyikan custom cursor di perangkat sentuh/tanpa fine pointer */
+      @media (hover: none) or (pointer: coarse) {
+        .custom-cursor-dot,
+        .custom-cursor-ring {
+          display: none !important;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .intro-curtain {
+          display: none !important;
+        }
+        .custom-cursor-dot,
+        .custom-cursor-ring {
+          display: none !important;
+        }
+        .reveal,
+        .project-card.reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          clip-path: none !important;
+          transition: none !important;
+        }
+        .mask-reveal-text {
+          transform: none !important;
+          transition: none !important;
+        }
+        .stagger-word {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+        }
+        .btn, .btn-pill, .project-card, .skill-pill, .hero-card img, .nav-link, .nav-logo {
+          transition: none !important;
+          transform: none !important;
+        }
+        .timeline-progress {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- FILM NOISE GRAIN -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- INTRO CURTAIN REVEAL -->
+    <div class="intro-curtain" id="introCurtain" aria-hidden="true">
+      <div class="intro-logo" id="introLogo">PORTFOLIO.<span>NAMA</span></div>
+      <div class="intro-bar"></div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="custom-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="custom-cursor-ring" id="cursorRing" aria-hidden="true">
+      <span class="cursor-text" id="cursorText"></span>
+    </div>
+
+    <!-- TOP SCROLL PROGRESS BAR -->
+    <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
+
+    <!-- 1. NAVIGATION BAR -->
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#home" class="nav-logo" id="navLogo">PORTFOLIO.<span>NAMA</span></a>
+        
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT SECTIONS (RENDERED DYNAMICALLY VIA CONFIG) -->
+    <main>
+      <!-- 2. HERO SECTION -->
+      <section class="hero-section" id="home">
+        <div class="container hero-grid" id="heroContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- 3. ABOUT SECTION -->
+      <section class="section-padding about-section" id="about">
+        <div class="container about-grid" id="aboutContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- 4. EXPERIENCE / TIMELINE SECTION -->
+      <section class="section-padding experience-section" id="experience">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow" id="expEyebrow">Career & History</span>
+            <h2 id="expTitle">
+              <span class="mask-reveal-wrapper"><span class="mask-reveal-text">Work Experience</span></span>
+            </h2>
+          </div>
+          <div class="timeline-container" id="timelineContainer">
+            <div class="timeline-track"></div>
+            <div class="timeline-progress" id="timelineProgress">
+              <div class="timeline-pulse-tip" id="timelinePulseTip"></div>
+            </div>
+            <div id="timelineList">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PROJECTS SECTION -->
+      <section class="section-padding projects-section" id="projects">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow" id="projEyebrow">Projects</span>
+            <h2 id="projTitle">
+              <span class="mask-reveal-wrapper"><span class="mask-reveal-text">Recent Projects</span></span>
+            </h2>
+          </div>
+          <div class="projects-grid" id="projectsGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. SKILLS SECTION -->
+      <section class="section-padding skills-section" id="skills">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow" id="skillsEyebrow">Core Competencies</span>
+            <h2 id="skillsTitle">
+              <span class="mask-reveal-wrapper"><span class="mask-reveal-text">Skills & Tools</span></span>
+            </h2>
+          </div>
+          <div class="skills-cloud" id="skillsCloud">
+            <div class="skills-spotlight" id="skillsSpotlight"></div>
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. CONTACT SECTION -->
+      <section class="section-padding contact-section" id="contact">
+        <div class="container">
+          <div class="contact-box reveal" id="contactBox">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 8. FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-text" id="footerText">
+          <!-- Rendered by JS -->
+        </p>
+      </div>
+    </footer>
+
+    <!-- ==========================================================================
+         JAVASCRIPT CONFIG & VANILLA INTERACTION LOGIC
+         ========================================================================== -->
+    <script>
+      /**
+       * CONFIGURATION OBJECT
+       * Edit konten di bawah ini untuk mengubah seluruh data portfolio secara instan!
+       */
+      const CONFIG = {
+        logo: {
+          prefix: "PORTFOLIO",
+          nameAccent: "HAIRUL"
+        },
+        profile: {
+          eyebrow: "Portfolio",
+          greetingPrefix: "Hi, i'm ",
+          name: "Hairul Mardana Putra",
+          role: "Finance & Accounting",
+          shortBio: "A finance and accounting with practical experience managing accounts receivable, accounts payable, purchasing, and inventory. I previously handled AP, AR, and HR recruitment at Es Oyen Macan, gaining experience in financial administration as well as recruitment and employee management processes. Currently, I work as an Accounts Receivable staff member at Teman Dental, focusing on receivables management, payment reconciliation, and collections. This diverse experience has strengthened my skills in finance, administration, communication, and human resource management. Based in Tangerang, Indonesia.",
+          avatarUrl: "https://i.ibb.co.com/n8N7GTdh/IMG-20260826-150510-137.png",
+          ctaPrimary: {
+            text: "View Project →",
+            href: "#projects"
+          },
+          ctaSecondary: {
+            text: "Contact Me",
+            href: "#contact"
+          }
+        },
+        about: {
+          eyebrow: "About Me",
+          title: "A Little Story About My Journey",
+          longBio: "My career journey began at SMKN 05 Tangerang, where I developed an interest in business administration and finance. My aptitude for working with numbers, attention to detail, and financial analysis drove me to gain experience in purchasing, inventory management, and the management of accounts payable and accounts receivable. I also have experience supporting HR recruitment processes, which further strengthened my communication and human resource management skills. Currently, I am focused on honing my financial expertise and building a professional career as a reliable and competent finance professional.",
+          stats: [
+            { number: "1+", label: "Years of Experience" },
+            { number: "5+", label: "Core Specializations" },
+            { number: "2+", label: "Companies Worked" }
+          ]
+        },
+        experience: [
+          {
+            period: "2025 August — 2026 April",
+            role: "AR/AP/Purchasing/Stockkeeper/HR Recruitment",
+            company: "Es Oyen Macan",
+            description: "Handled a broad range of finance and administrative functions across the company, including managing customer receivables and monitoring outstanding invoices, verifying supplier invoices and supporting documents, processing purchase requests and purchase orders, handling recruitment administration and candidate screening, and monitoring incoming and outgoing inventory. Gained hands-on experience across accounts receivable, accounts payable, purchasing, HR recruitment, and stock keeping within a single fast-paced role.",
+            skills: ["Google Spreadsheet", "Payment Reconciliation", "Vendro Management", "Procurement", "Inventory Management", "CV Screening"]
+          },
+          {
+            period: "2026 April — 2026 August",
+            role: "Teman Dental",
+            company: "Account Receivable",
+            description: "Accounts Receivable Staff with expertise in receivables management, payment reconciliation, collections, and financial administration. Responsible for managing and monitoring Accounts Receivable activities, ensuring accurate payment tracking, timely reconciliation, effective collection processes, and proper financial documentation. Experienced in coordinating branch-level receivables and maintaining accurate financial records to support the company’s overall financial operations.",
+            skills: ["Google Spreadsheet", "Payment Reconciliation", "Invoice Management", "Transaction Recording"]
+          },
+          {
+            period: "2026 August — Present",
+            role: "Romeesa Interior Decor & Design",
+            company: "Account Receivable & General Affair",
+            description: "Currently responsible for managing Accounts Receivable activities, including monitoring outstanding receivables, payment reconciliation, collections, payment verification, and financial administration. Also responsible for General Affairs activities, including procurement of operational supplies, asset and inventory administration, facility maintenance, vendor coordination, and supporting daily operational needs. Ensuring accurate financial records, efficient administrative processes, and smooth day-to-day business operations.",
+            skills: ["Google Spreadsheet", "Payment Reconciliation", "Office & Facility Management", "Vendor Management"]
+          }
+        ],
+        projects: [
+          {
+            title: "Master Data",
+            category: "Worksheet containing master data, daily income, and G&L data by branch.",
+            description: "Integrated F&B financial spreadsheet system covering daily revenue, operational transactions, and branch-level P&L reporting for accurate and efficient financial monitoring.",
+            imageUrl: "https://i.ibb.co.com/4RJZyJgZ/Screenshot-2026-08-31-035813.png",
+            link: "https://docs.google.com/spreadsheets/d/1H0Q7LZybo3iZ2G-Ryu8Kk259baQPky-OIhlI_Nw1gj8/edit?usp=sharing",
+            linkText: "View Details →"
+          },
+          {
+            title: "Payroll Tracker",
+            category: "Employee Salary and Leave Spreadsheet",
+            description: "An operational spreadsheet to help companies manage payroll data, work schedules, and employee leave in a structured and easily monitored manner.",
+            imageUrl: "https://i.ibb.co.com/PG2qB7T2/Screenshot-2026-08-31-041023.png",
+            link: "https://docs.google.com/spreadsheets/d/1dSYmbQZGkYd76rnI8w98DuL3DcFRXcFiOH5isg8OqpA/edit?usp=sharing",
+            linkText: "View Details →"
+          },
+          {
+            title: "Purchasing & Inventory Control System",
+            category: "Purchase and Stock Keeping Data Worksheet",
+            description: "An operational spreadsheet for managing purchasing, supplier data, and periodic inventory monitoring in a structured and efficient manner.",
+            imageUrl: "https://i.ibb.co.com/bjMDYCWg/Screenshot-2026-08-31-041828.png",
+            link: "https://docs.google.com/spreadsheets/d/1dhK4RGu_3DJiXD5TRvgbITl1MhnKzYoFNRIWCfn1lSg/edit?usp=sharing",
+            linkText: "View Details →"
+          },
+          {
+            title: "HR Recruitment Data Management",
+            category: "HR Recruiter Data Worksheet",
+            description: "An operational spreadsheet for managing recruitment, candidate tracking, and interview scheduling.",
+            imageUrl: "https://i.ibb.co.com/8gbxZSJQ/Screenshot-2026-08-31-042039.png",
+            link: "https://docs.google.com/spreadsheets/d/1ooP3QrldR_7qDNtmHtV2AVV0N9eREjIZ/edit?usp=sharing&ouid=106588862078229544425&rtpof=true&sd=true",
+            linkText: "View Details →"
+          },
+          {
+            title: "Branch Revenue Tracking & Analysis",
+            category: "Revenue data worksheet for each branch and total revenue",
+            description: "A structured spreadsheet for consolidating branch revenue, total turnover, and customer receipt data.",
+            imageUrl: "https://i.ibb.co.com/gM7F6gqQ/Screenshot-2026-08-31-042302.png",
+            link: "https://docs.google.com/spreadsheets/d/1TCaPtDj8b9u-TJ7YSnFaSJ-7i7LOx8AwFJR9upUl4uA/edit?usp=sharing",
+            linkText: "View Details →"
+          }
+        ],
+        skills: [
+          "Google Sheets & Excel",
+          "Accounts Receivable (AR)",
+          "Accounts Payable (AP)",
+          "Payment Reconciliation",
+          "Financial Administration",
+          "Purchasing & Procurement",
+          "Inventory & Stock Opname",
+          "HR & Recruitment Support",
+          "Invoice & Billing Management",
+          "Financial Reporting & Analysis",
+          "Vendor Management",
+          "Cash Flow Monitoring"
+        ],
+        contact: {
+          eyebrow: "Let's Connect",
+          title: "Have an opportunity or inquiry?",
+          description: "I am always open to discussing career opportunities, financial administration projects, or professional collaborations in finance & accounting.",
+          email: "hairulmardanaputra@gmail.com",
+          emailButtonText: "Send Me an Email",
+          socialLinks: [
+            { name: "LinkedIn", url: "https://www.linkedin.com/in/hairul-mardana-putra-903237407?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
+            { name: "Instagram", url: "https://www.instagram.com/ur.rulle?igsi=MXgzMnl2bHJxMGNpaQ==" },
+            { name: "CV/Resume", url: "https://canva.link/5xofzy1ezathbzl" }
+          ]
+        },
+        footer: {
+          copyrightHolder: "Hairul Mardana Putra. All rights reserved."
+        }
+      };
+
+      /**
+       * Image Fallback Helper
+       */
+      function handleImageError(imgElement, placeholderText) {
+        imgElement.onerror = null;
+        const parent = imgElement.parentElement;
+        if (parent) {
+          parent.innerHTML = `
+            <div class="img-fallback">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+              </svg>
+              <span>${placeholderText || "Preview Image"}</span>
+            </div>
+          `;
+        }
+      }
+
+      /**
+       * Helper for Staggered Hero Title
+       */
+      function buildStaggeredTitle(prefix, name) {
+        const fullGreeting = `${prefix}`;
+        const prefixWords = fullGreeting.split(" ");
+        const nameWords = name.split(" ");
+        let delayIndex = 0;
+
+        const prefixSpans = prefixWords.filter(w => w).map(word => {
+          const delay = (0.35 + delayIndex * 0.08).toFixed(2);
+          delayIndex++;
+          return `<span class="stagger-word" style="animation-delay: ${delay}s">${word} </span>`;
+        }).join("");
+
+        const nameSpans = nameWords.map(word => {
+          const delay = (0.35 + delayIndex * 0.08).toFixed(2);
+          delayIndex++;
+          return `<span class="stagger-word italic-accent" style="animation-delay: ${delay}s">${word} </span>`;
+        }).join("");
+
+        return `${prefixSpans}${nameSpans}`;
+      }
+
+      /**
+       * DOM RENDERING FUNCTIONS
+       */
+      function renderApp() {
+        // 0. Intro Curtain Logo
+        const introLogo = document.getElementById("introLogo");
+        if (introLogo) {
+          introLogo.innerHTML = `${CONFIG.logo.prefix}.<span>${CONFIG.logo.nameAccent}</span>`;
+        }
+
+        // 1. Render Nav Logo
+        const navLogo = document.getElementById("navLogo");
+        if (navLogo) {
+          navLogo.innerHTML = `${CONFIG.logo.prefix}.<span>${CONFIG.logo.nameAccent}</span>`;
+        }
+
+        // 2. Render Hero
+        const heroContainer = document.getElementById("heroContainer");
+        if (heroContainer) {
+          heroContainer.innerHTML = `
+            <div class="hero-content reveal">
+              <span class="eyebrow">${CONFIG.profile.eyebrow}</span>
+              <h1 class="hero-title">${buildStaggeredTitle(CONFIG.profile.greetingPrefix, CONFIG.profile.name)}</h1>
+              <p class="hero-role">${CONFIG.profile.role}</p>
+              <p class="hero-bio">${CONFIG.profile.shortBio}</p>
+              <div class="hero-actions">
+                <a href="${CONFIG.profile.ctaPrimary.href}" class="btn btn-primary">${CONFIG.profile.ctaPrimary.text}</a>
+                <a href="${CONFIG.profile.ctaSecondary.href}" class="btn btn-ghost">${CONFIG.profile.ctaSecondary.text}</a>
+              </div>
+            </div>
+            <div class="hero-image-wrapper reveal" id="heroImageWrapper">
+              <div class="hero-card">
+                <img 
+                  src="${CONFIG.profile.avatarUrl}" 
+                  alt="${CONFIG.profile.name}"
+                  loading="lazy"
+                  onerror="handleImageError(this, '${CONFIG.profile.name}')"
+                />
+              </div>
+            </div>
+          `;
+        }
+
+        // 3. Render About
+        const aboutContainer = document.getElementById("aboutContainer");
+        if (aboutContainer) {
+          const statsHtml = CONFIG.about.stats.map(stat => {
+            return `
+              <div class="stat-item">
+                <span class="stat-number" data-target="${stat.number}">${stat.number}</span>
+                <span class="stat-label">${stat.label}</span>
+              </div>
+            `;
+          }).join("");
+
+          aboutContainer.innerHTML = `
+            <div class="reveal">
+              <span class="eyebrow">${CONFIG.about.eyebrow}</span>
+              <h2>
+                <span class="mask-reveal-wrapper"><span class="mask-reveal-text">${CONFIG.about.title}</span></span>
+              </h2>
+            </div>
+            <div class="reveal">
+              <p class="about-bio-text">${CONFIG.about.longBio}</p>
+              <div class="about-stats" id="aboutStats">
+                ${statsHtml}
+              </div>
+            </div>
+          `;
+        }
+
+        // 4. Render Experience
+        const timelineList = document.getElementById("timelineList");
+        if (timelineList) {
+          timelineList.innerHTML = CONFIG.experience.map(item => {
+            const tagsHtml = item.skills.map(skill => `<span class="timeline-tag">${skill}</span>`).join("");
+            return `
+              <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-period">${item.period}</div>
+                <h3 class="timeline-role">${item.role}</h3>
+                <div class="timeline-company">${item.company}</div>
+                <p class="timeline-desc">${item.description}</p>
+                <div class="timeline-tags">${tagsHtml}</div>
+              </div>
+            `;
+          }).join("");
+        }
+
+        // 5. Render Projects with 3D card tilt & index
+        const projectsGrid = document.getElementById("projectsGrid");
+        if (projectsGrid) {
+          projectsGrid.innerHTML = CONFIG.projects.map((proj, idx) => {
+            const numStr = String(idx + 1).padStart(2, "0");
+            const isExternal = proj.link && !proj.link.startsWith("#");
+            const targetAttr = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
+            return `
+              <article class="project-card reveal" data-card-tilt="true">
+                <span class="project-index-num">${numStr}</span>
+                <div class="project-media">
+                  <img 
+                    src="${proj.imageUrl}" 
+                    alt="${proj.title}" 
+                    loading="lazy"
+                    onerror="handleImageError(this, '${proj.title}')"
+                  />
+                </div>
+                <div class="project-body">
+                  <span class="project-category">${proj.category}</span>
+                  <h3 class="project-title">${proj.title}</h3>
+                  <p class="project-desc">${proj.description}</p>
+                  <a href="${proj.link}" class="project-link"${targetAttr}>${proj.linkText}</a>
+                </div>
+              </article>
+            `;
+          }).join("");
+        }
+
+        // 6. Render Skills
+        const skillsCloud = document.getElementById("skillsCloud");
+        if (skillsCloud) {
+          const spotlight = `<div class="skills-spotlight" id="skillsSpotlight"></div>`;
+          const pills = CONFIG.skills.map(skill => `<span class="skill-pill reveal">${skill}</span>`).join("");
+          skillsCloud.innerHTML = spotlight + pills;
+        }
+
+        // 7. Render Contact
+        const contactBox = document.getElementById("contactBox");
+        if (contactBox) {
+          const socialLinksHtml = CONFIG.contact.socialLinks.map(link => `
+            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="btn btn-pill">${link.name}</a>
+          `).join("");
+
+          contactBox.innerHTML = `
+            <span class="eyebrow">${CONFIG.contact.eyebrow}</span>
+            <h2 class="contact-title">
+              <span class="mask-reveal-wrapper"><span class="mask-reveal-text">${CONFIG.contact.title}</span></span>
+            </h2>
+            <p class="contact-desc">${CONFIG.contact.description}</p>
+            <a href="mailto:${CONFIG.contact.email}" class="btn btn-primary contact-main-btn">${CONFIG.contact.emailButtonText}</a>
+            <div class="social-links-container">
+              ${socialLinksHtml}
+            </div>
+          `;
+        }
+
+        // 8. Render Footer
+        const footerText = document.getElementById("footerText");
+        if (footerText) {
+          const year = new Date().getFullYear();
+          footerText.innerHTML = `© ${year} ${CONFIG.footer.copyrightHolder}`;
+        }
+      }
+
+      /**
+       * INTERACTION CONTROLLER: Luxury Micro-Interactions, Magnetic Buttons, Cursor, 3D Tilt, Stat Counter
+       */
+      function initInteractions() {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        // 1. Intro Curtain Reveal Animation
+        const introCurtain = document.getElementById("introCurtain");
+        if (introCurtain) {
+          if (prefersReducedMotion) {
+            introCurtain.style.display = "none";
+          } else {
+            window.addEventListener("load", () => {
+              setTimeout(() => {
+                introCurtain.classList.add("loaded");
+              }, 600);
+            });
+            // Fallback timeout in case window load fired early
+            setTimeout(() => {
+              introCurtain.classList.add("loaded");
+            }, 1200);
+          }
+        }
+
+        // 2. Custom Magnetic & Trailing Cursor
+        const cursorDot = document.getElementById("cursorDot");
+        const cursorRing = document.getElementById("cursorRing");
+        const cursorText = document.getElementById("cursorText");
+
+        let mouseX = -100;
+        let mouseY = -100;
+        let dotX = -100;
+        let dotY = -100;
+        let ringX = -100;
+        let ringY = -100;
+        let cursorVisible = false;
+
+        if (hasFinePointer && !prefersReducedMotion && cursorDot && cursorRing) {
+          window.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!cursorVisible) {
+              cursorVisible = true;
+              cursorDot.style.opacity = "1";
+              cursorRing.style.opacity = "1";
+              dotX = mouseX;
+              dotY = mouseY;
+              ringX = mouseX;
+              ringY = mouseY;
+            }
+          }, { passive: true });
+
+          document.addEventListener("mouseleave", () => {
+            cursorVisible = false;
+            cursorDot.style.opacity = "0";
+            cursorRing.style.opacity = "0";
+          });
+
+          function animateCursor() {
+            if (cursorVisible) {
+              // Smooth lerp: Dot faster (0.35), Ring slower (0.14)
+              dotX += (mouseX - dotX) * 0.35;
+              dotY += (mouseY - dotY) * 0.35;
+              ringX += (mouseX - ringX) * 0.14;
+              ringY += (mouseY - ringY) * 0.14;
+
+              cursorDot.style.left = `${dotX}px`;
+              cursorDot.style.top = `${dotY}px`;
+              cursorRing.style.left = `${ringX}px`;
+              cursorRing.style.top = `${ringY}px`;
+            }
+            requestAnimationFrame(animateCursor);
+          }
+          requestAnimationFrame(animateCursor);
+
+          // Cursor contextual states
+          function updateCursorContext() {
+            // Buttons
+            document.querySelectorAll(".btn, .btn-primary, .btn-ghost, .btn-pill").forEach(el => {
+              el.addEventListener("mouseenter", () => {
+                cursorRing.classList.add("is-hovering-btn");
+                cursorRing.classList.remove("is-hovering-card", "is-hovering-link");
+                if (cursorText) cursorText.textContent = "CLICK";
+              });
+              el.addEventListener("mouseleave", () => {
+                cursorRing.classList.remove("is-hovering-btn");
+                if (cursorText) cursorText.textContent = "";
+              });
+            });
+
+            // Project Cards
+            document.querySelectorAll(".project-card").forEach(el => {
+              el.addEventListener("mouseenter", () => {
+                cursorRing.classList.add("is-hovering-card");
+                cursorRing.classList.remove("is-hovering-btn", "is-hovering-link");
+                if (cursorText) cursorText.textContent = "VIEW";
+              });
+              el.addEventListener("mouseleave", () => {
+                cursorRing.classList.remove("is-hovering-card");
+                if (cursorText) cursorText.textContent = "";
+              });
+            });
+
+            // Nav links & text links
+            document.querySelectorAll(".nav-link, .nav-logo, .project-link").forEach(el => {
+              el.addEventListener("mouseenter", () => {
+                cursorRing.classList.add("is-hovering-link");
+              });
+              el.addEventListener("mouseleave", () => {
+                cursorRing.classList.remove("is-hovering-link");
+              });
+            });
+          }
+
+          setTimeout(updateCursorContext, 100);
+        }
+
+        // 3. Magnetic Button Effect
+        if (hasFinePointer && !prefersReducedMotion) {
+          const magneticElements = document.querySelectorAll(".btn, .btn-pill, .nav-link, .nav-logo, .nav-toggle");
+          magneticElements.forEach(el => {
+            el.addEventListener("mousemove", (e) => {
+              const rect = el.getBoundingClientRect();
+              const centerX = rect.left + rect.width / 2;
+              const centerY = rect.top + rect.height / 2;
+              const deltaX = (e.clientX - centerX) * 0.28;
+              const deltaY = (e.clientY - centerY) * 0.28;
+              el.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            });
+
+            el.addEventListener("mouseleave", () => {
+              el.style.transform = "translate(0px, 0px)";
+            });
+          });
+        }
+
+        // 4. 3D Card Tilt Effect on Project Cards
+        if (hasFinePointer && !prefersReducedMotion) {
+          const cards = document.querySelectorAll(".project-card");
+          cards.forEach(card => {
+            card.addEventListener("mousemove", (e) => {
+              const rect = card.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+
+              const rotateX = ((y - centerY) / centerY) * -6; // max 6 deg
+              const rotateY = ((x - centerX) / centerX) * 6;
+
+              card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px) scale3d(1.01, 1.01, 1.01)`;
+            });
+
+            card.addEventListener("mouseleave", () => {
+              card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)";
+            });
+          });
+        }
+
+        // 5. Interactive Spotlight in Skills Cloud
+        const skillsCloud = document.getElementById("skillsCloud");
+        if (skillsCloud) {
+          skillsCloud.addEventListener("mousemove", (e) => {
+            const rect = skillsCloud.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            skillsCloud.style.setProperty("--spotlight-x", `${x}px`);
+            skillsCloud.style.setProperty("--spotlight-y", `${y}px`);
+          });
+        }
+
+        // 6. Mobile Nav Toggle
+        const navToggle = document.getElementById("navToggle");
+        const navLinks = document.getElementById("navLinks");
+        if (navToggle && navLinks) {
+          navToggle.addEventListener("click", () => {
+            const isOpen = navLinks.classList.toggle("open");
+            navToggle.classList.toggle("open", isOpen);
+            navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+          });
+
+          navLinks.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+              navLinks.classList.remove("open");
+              navToggle.classList.remove("open");
+              navToggle.setAttribute("aria-expanded", "false");
+            });
+          });
+        }
+
+        // 7. Stat Number Count-up Animation
+        function animateCounter(el) {
+          const rawText = el.getAttribute("data-target") || el.textContent || "";
+          const match = rawText.match(/(\d+)/);
+          if (!match) return;
+
+          const targetNum = parseInt(match[1], 10);
+          const prefix = rawText.startsWith("0") && rawText.length > 1 && !rawText.startsWith("00") ? "0" : "";
+          const suffix = rawText.replace(/^[0-9]+/, "");
+          const duration = 1600; // ms
+          const startTime = performance.now();
+
+          function step(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out expo
+            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const currentVal = Math.floor(easeProgress * targetNum);
+
+            const displayNum = prefix && currentVal < 10 ? `0${currentVal}` : `${currentVal}`;
+            el.textContent = `${displayNum}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              el.textContent = rawText; // Exact final string
+            }
+          }
+
+          requestAnimationFrame(step);
+        }
+
+        // 8. Reveal on Scroll with IntersectionObserver
+        const revealElements = document.querySelectorAll(".reveal");
+        const statNumbers = document.querySelectorAll(".stat-number");
+        let statsAnimated = false;
+
+        if (prefersReducedMotion) {
+          revealElements.forEach(el => el.classList.add("is-revealed"));
+        } else if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+
+                // If about stats container enters, animate counters
+                if (!statsAnimated && (entry.target.id === "aboutStats" || entry.target.contains(document.getElementById("aboutStats")))) {
+                  statsAnimated = true;
+                  statNumbers.forEach(statEl => animateCounter(statEl));
+                }
+
+                obs.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+          });
+
+          revealElements.forEach(el => observer.observe(el));
+        } else {
+          revealElements.forEach(el => el.classList.add("is-revealed"));
+          statNumbers.forEach(statEl => animateCounter(statEl));
+        }
+
+        // 9. Parallax Effect on Hero Image Wrapper
+        const heroImageWrapper = document.getElementById("heroImageWrapper");
+
+        // 10. Global Scroll Handler (Progress Bar + Timeline + Parallax)
+        const scrollProgressBar = document.getElementById("scrollProgressBar");
+        const timelineContainer = document.getElementById("timelineContainer");
+        const timelineProgress = document.getElementById("timelineProgress");
+        const timelinePulseTip = document.getElementById("timelinePulseTip");
+        const timelineItems = document.querySelectorAll(".timeline-item");
+
+        function onScrollHandler() {
+          const scrollY = window.scrollY || window.pageYOffset;
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+          // A. Top Horizontal Progress Bar
+          if (scrollProgressBar && maxScroll > 0) {
+            const scrollRatio = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+            scrollProgressBar.style.width = `${(scrollRatio * 100).toFixed(2)}%`;
+          }
+
+          // B. Hero Image Subtle Parallax
+          if (heroImageWrapper && !prefersReducedMotion && scrollY < window.innerHeight) {
+            heroImageWrapper.style.transform = `translateY(${(scrollY * 0.08).toFixed(1)}px)`;
+          }
+
+          // C. Timeline Vertical Dynamic Progress & Glow Pulse Tip
+          if (timelineContainer && timelineProgress) {
+            const rect = timelineContainer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const startOffset = windowHeight * 0.7;
+            const containerHeight = rect.height;
+
+            const scrolledDistance = startOffset - rect.top;
+            let progressRatio = scrolledDistance / containerHeight;
+            progressRatio = Math.max(0, Math.min(1, progressRatio));
+
+            timelineProgress.style.height = `${progressRatio * 100}%`;
+
+            if (timelinePulseTip) {
+              if (progressRatio > 0.02 && progressRatio < 0.98) {
+                timelinePulseTip.classList.add("active");
+              } else {
+                timelinePulseTip.classList.remove("active");
+              }
+            }
+
+            // Check each timeline item dot & text active state
+            timelineItems.forEach(item => {
+              const itemRect = item.getBoundingClientRect();
+              const dot = item.querySelector(".timeline-dot");
+              if (dot) {
+                if (itemRect.top <= windowHeight * 0.65) {
+                  dot.classList.add("active");
+                  item.classList.add("active");
+                } else {
+                  dot.classList.remove("active");
+                  item.classList.remove("active");
+                }
+              }
+            });
+          }
+        }
+
+        window.addEventListener("scroll", onScrollHandler, { passive: true });
+        window.addEventListener("resize", onScrollHandler, { passive: true });
+        setTimeout(onScrollHandler, 100);
+      }
+
+      // Initialize on DOM load
+      document.addEventListener("DOMContentLoaded", () => {
+        renderApp();
+        initInteractions();
+      });
+    </script>
+  </body>
+</html>

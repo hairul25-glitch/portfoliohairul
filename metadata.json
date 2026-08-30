@@ -1,0 +1,6 @@
+{
+  "name": "Hairul Mardana Putra Portfolio",
+  "description": "Personal finance & accounting portfolio website for Hairul Mardana Putra featuring modern dark-mode editorial typography.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
