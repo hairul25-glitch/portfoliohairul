@@ -1965,7 +1965,7 @@
           const targetNum = parseInt(match[1], 10);
           const prefix = rawText.startsWith("0") && rawText.length > 1 && !rawText.startsWith("00") ? "0" : "";
           const suffix = rawText.replace(/^[0-9]+/, "");
-          const duration = 1600; // ms
+          const duration = 800; // ms
           const startTime = performance.now();
 
           function step(currentTime) {
