@@ -179,6 +179,7 @@
         transition: opacity 0.3s ease, transform 0.15s ease;
         will-change: transform, left, top;
         box-shadow: 0 0 10px rgba(227, 162, 58, 0.6);
+        opacity: 0;
       }
 
       .custom-cursor-ring {
@@ -197,6 +198,7 @@
         justify-content: center;
         transition: width 0.3s var(--ease-luxury), height 0.3s var(--ease-luxury), background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
         will-change: transform, left, top, width, height;
+        opacity: 0;
       }
 
       .cursor-text {
@@ -1284,14 +1286,6 @@
       /* ==========================================================================
          19. ACCESSIBILITY & PREFERS-REDUCED-MOTION
          ========================================================================== */
-      /* Sembunyikan custom cursor di perangkat sentuh/tanpa fine pointer */
-      @media (hover: none) or (pointer: coarse) {
-        .custom-cursor-dot,
-        .custom-cursor-ring {
-          display: none !important;
-        }
-      }
-
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
@@ -1815,7 +1809,7 @@
           }
         }
 
-        // 2. Custom Magnetic & Trailing Cursor
+        // 2. Custom Magnetic & Trailing Cursor (Desktop + Mobile Touch)
         const cursorDot = document.getElementById("cursorDot");
         const cursorRing = document.getElementById("cursorRing");
         const cursorText = document.getElementById("cursorText");
@@ -1828,7 +1822,8 @@
         let ringY = -100;
         let cursorVisible = false;
 
-        if (hasFinePointer && !prefersReducedMotion && cursorDot && cursorRing) {
+        if (!prefersReducedMotion && cursorDot && cursorRing) {
+          // Desktop mouse events
           window.addEventListener("mousemove", (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
@@ -1849,6 +1844,37 @@
             cursorRing.style.opacity = "0";
           });
 
+          // Mobile touch events (follow finger and fade out on release)
+          const handleTouchMove = (e) => {
+            if (e.touches && e.touches.length > 0) {
+              const touch = e.touches[0];
+              mouseX = touch.clientX;
+              mouseY = touch.clientY;
+              if (!cursorVisible) {
+                cursorVisible = true;
+                cursorDot.style.opacity = "1";
+                cursorRing.style.opacity = "1";
+                dotX = mouseX;
+                dotY = mouseY;
+                ringX = mouseX;
+                ringY = mouseY;
+              }
+            }
+          };
+
+          const handleTouchEnd = () => {
+            cursorVisible = false;
+            cursorDot.style.opacity = "0";
+            cursorRing.style.opacity = "0";
+            cursorRing.classList.remove("is-hovering-btn", "is-hovering-card", "is-hovering-link");
+            if (cursorText) cursorText.textContent = "";
+          };
+
+          window.addEventListener("touchstart", handleTouchMove, { passive: true });
+          window.addEventListener("touchmove", handleTouchMove, { passive: true });
+          window.addEventListener("touchend", handleTouchEnd, { passive: true });
+          window.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+
           function animateCursor() {
             if (cursorVisible) {
               // Smooth lerp: Dot faster (0.35), Ring slower (0.14)
@@ -1866,42 +1892,60 @@
           }
           requestAnimationFrame(animateCursor);
 
-          // Cursor contextual states
+          // Cursor contextual states (Desktop Hover + Mobile Touch)
           function updateCursorContext() {
             // Buttons
             document.querySelectorAll(".btn, .btn-primary, .btn-ghost, .btn-pill").forEach(el => {
-              el.addEventListener("mouseenter", () => {
+              const activateBtn = () => {
                 cursorRing.classList.add("is-hovering-btn");
                 cursorRing.classList.remove("is-hovering-card", "is-hovering-link");
                 if (cursorText) cursorText.textContent = "CLICK";
-              });
-              el.addEventListener("mouseleave", () => {
+              };
+              const deactivateBtn = () => {
                 cursorRing.classList.remove("is-hovering-btn");
                 if (cursorText) cursorText.textContent = "";
-              });
+              };
+
+              el.addEventListener("mouseenter", activateBtn);
+              el.addEventListener("mouseleave", deactivateBtn);
+              el.addEventListener("touchstart", activateBtn, { passive: true });
+              el.addEventListener("touchend", deactivateBtn, { passive: true });
+              el.addEventListener("touchcancel", deactivateBtn, { passive: true });
             });
 
             // Project Cards
             document.querySelectorAll(".project-card").forEach(el => {
-              el.addEventListener("mouseenter", () => {
+              const activateCard = () => {
                 cursorRing.classList.add("is-hovering-card");
                 cursorRing.classList.remove("is-hovering-btn", "is-hovering-link");
                 if (cursorText) cursorText.textContent = "VIEW";
-              });
-              el.addEventListener("mouseleave", () => {
+              };
+              const deactivateCard = () => {
                 cursorRing.classList.remove("is-hovering-card");
                 if (cursorText) cursorText.textContent = "";
-              });
+              };
+
+              el.addEventListener("mouseenter", activateCard);
+              el.addEventListener("mouseleave", deactivateCard);
+              el.addEventListener("touchstart", activateCard, { passive: true });
+              el.addEventListener("touchend", deactivateCard, { passive: true });
+              el.addEventListener("touchcancel", deactivateCard, { passive: true });
             });
 
             // Nav links & text links
             document.querySelectorAll(".nav-link, .nav-logo, .project-link").forEach(el => {
-              el.addEventListener("mouseenter", () => {
+              const activateLink = () => {
                 cursorRing.classList.add("is-hovering-link");
-              });
-              el.addEventListener("mouseleave", () => {
+              };
+              const deactivateLink = () => {
                 cursorRing.classList.remove("is-hovering-link");
-              });
+              };
+
+              el.addEventListener("mouseenter", activateLink);
+              el.addEventListener("mouseleave", deactivateLink);
+              el.addEventListener("touchstart", activateLink, { passive: true });
+              el.addEventListener("touchend", deactivateLink, { passive: true });
+              el.addEventListener("touchcancel", deactivateLink, { passive: true });
             });
           }
 
